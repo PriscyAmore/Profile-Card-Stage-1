@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Card</title>
+
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #101018;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      font-family: sans-serif;
+    }
+
+    /* ── CARD ── */
+    article[data-testid="test-profile-card"] {
+      background: #1b1b26;
+      border: 1.5px solid #2b2b3a;
+      border-radius: 18px;
+      padding: 28px 26px 24px;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    /* ── TOP SECTION: avatar + name + bio ── */
+    .profile-top {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    figure {
+      flex-shrink: 0;
+      margin: 0;
+    }
+
+    img[data-testid="test-user-avatar"] {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #2b2b3a;
+      display: block;
+    }
+
+    .profile-info {
+      flex: 1;
+    }
+
+    h2[data-testid="test-user-name"] {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #ededf5;
+      margin-bottom: 6px;
+    }
+
+    p[data-testid="test-user-bio"] {
+      font-size: 0.875rem;
+      color: #a0a0b5;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    /* ── TIME ── */
+    .time-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+
+    .time-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #55556a;
+    }
+
+    [data-testid="test-user-time"] {
+      font-size: 0.78rem;
+      color: #e8ff47;
+      font-weight: 500;
+    }
+
+    /* ── SOCIAL LINKS ── */
+    nav {
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #55556a;
+      margin-bottom: 8px;
+    }
+
+    ul[data-testid="test-user-social-links"] {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    ul[data-testid="test-user-social-links"] a {
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #4dc8ff;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    ul[data-testid="test-user-social-links"] a:hover {
+      background: rgba(77, 200, 255, 0.1);
+      border-color: rgba(77, 200, 255, 0.3);
+    }
+
+    ul[data-testid="test-user-social-links"] a:focus-visible {
+      outline: 2px solid #e8ff47;
+      outline-offset: 3px;
+    }
+
+    /* ── HOBBIES & DISLIKES ── */
+    .lists-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    section {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid #2b2b3a;
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+
+    ul[data-testid="test-user-hobbies"],
+    ul[data-testid="test-user-dislikes"] {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    ul[data-testid="test-user-hobbies"] li,
+    ul[data-testid="test-user-dislikes"] li {
+      font-size: 0.78rem;
+      color: #a0a0b5;
+      padding-left: 12px;
+      position: relative;
+    }
+
+    ul[data-testid="test-user-hobbies"] li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      font-size: 0.5rem;
+      color: #e8ff47;
+      top: 3px;
+    }
+
+    ul[data-testid="test-user-dislikes"] li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      font-size: 0.5rem;
+      color: #ff4d6d;
+      top: 3px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 480px) {
+      .profile-top {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .lists-row {
+        grid-template-columns: 1fr;
+      }
+
+      ul[data-testid="test-user-social-links"] {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<article data-testid="test-profile-card">
+
+  <!-- TOP: avatar + name + bio -->
+  <div class="profile-top">
+    <figure>
+      <img
+        data-testid="test-user-avatar"
+        src="https://i.pravatar.cc/150"
+        alt="Profile photo of Ela Johnson"
+        width="80"
+        height="80"
+      />
+    </figure>
+
+    <div class="profile-info">
+      <h2 data-testid="test-user-name">Priscy Amore</h2>
+      <p data-testid="test-user-bio">
+        Frontend developer passionate about building accessible and beautiful web experiences.
+      </p>
+    </div>
+  </div>
+
+  <!-- CURRENT TIME -->
+  <div class="time-row">
+    <span class="time-label">Current time (ms):</span>
+    <span
+      data-testid="test-user-time"
+      aria-live="polite"
+      aria-label="Current time in milliseconds"
+    >
+    </span>
+  </div>
+
+  <!-- SOCIAL LINKS -->
+  <nav aria-label="Social media links">
+    <p class="section-title">Social</p>
+    <ul data-testid="test-user-social-links">
+      <li>
+        <a
+          data-testid="test-user-social-twitter"
+          href="https://x.com/elaamore_?s=11"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Twitter profile"
+        >
+          Twitter
+        </a>
+      </li>
+      <li>
+        <a
+          data-testid="test-user-social-github"
+          href="https://github.com/PriscyAmore"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub profile"
+        >
+          GitHub
+        </a>
+      </li>
+      <li>
+        <a
+          data-testid="test-user-social-linkedin"
+          href="https://www.linkedin.com/in/priscy-ogwezhi-185622217"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn profile"
+        >
+          LinkedIn
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- HOBBIES & DISLIKES -->
+  <div class="lists-row">
+
+    <section aria-labelledby="hobbies-title">
+      <p class="section-title" id="hobbies-title">Hobbies</p>
+      <ul data-testid="test-user-hobbies">
+        <li>Reading</li>
+        <li>Writing</li>
+        <li>Fitness</li>
+        <li>Gaming</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="dislikes-title">
+      <p class="section-title" id="dislikes-title">Dislikes</p>
+      <ul data-testid="test-user-dislikes">
+        <li>Spam emails</li>
+        <li>Traffic</li>
+        <li>Cold weather</li>
+        <li>Slow internet</li>
+      </ul>
+    </section>
+
+  </div>
+
+</article>
+
+<script>
+  // ── CURRENT TIME IN MILLISECONDS ──
+  const timeEl = document.querySelector('[data-testid="test-user-time"]');
+
+  function updateTime() {
+    timeEl.textContent = Date.now();
+  }
+
+  updateTime();
+  setInterval(updateTime, 1000);
+</script>
+
+</body>
+</html>
+
+
